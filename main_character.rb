@@ -1,9 +1,6 @@
 class MainCharacter
-
   #initialize and set x and y properties
   def initialize(x, y)
-    #drawing properties
-    #@image = Gosu::Image.load_tiles($window, "images/red.png", 64, 64, false)
     @spriteArr = Gosu::Image.load_tiles($window, "images/red.png", 64, 64, false)
     @sprite = @spriteArr[0]
     #location properties
@@ -27,7 +24,7 @@ class MainCharacter
 
   def update
     if @moving then
-      if @move_x > 0 then
+      if (@move_x > 0) then
         @move_x -= 1
         @x += 1
       elsif @move_x < 0 then
@@ -80,4 +77,5 @@ class MainCharacter
   def get_y
     return @y
   end
+
 end
