@@ -9,6 +9,8 @@ class Game < Gosu::Window
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "Pokemon (WSP Edition)!"
     @character = Character.new
+    $window = self
+    @character = MainCharacter.new(50, 50)
     @background_image = Gosu::Image.new(self, "images/background.png", :tileable => false)
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 20)
   end
@@ -16,12 +18,17 @@ class Game < Gosu::Window
   #updates to game window
   def update
     if Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft then
-      @character.turn_left
+      @character.move_left
     end
     if Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::GpRight then
-      @character.turn_right
+      @character.move_right
     end
-    @character.move_char
+    if Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::GpUp then
+      @character.move_up
+    end
+    if Gosu::button_down? Gosu::KbDown or Gosu::button_down? Gosu::GpDown then
+      @character.move_down
+    end
   end
 
   def draw
@@ -35,10 +42,22 @@ class Game < Gosu::Window
   end
 
   def button_down(id)
-    if id == Gosu::KbEscape
+    case id
+    when Gosu::KbUp
+      puts "Up button_down"
+    when Gosu::KbDown
+      puts "Down button_down"
+    when Gosu::KbLeft
+      @character.move_left
+      puts "LEFT"
+    when Gosu::KbRight
+      @character.move_right
+      puts "RIGHT"
+    when Gosu::KbEscape
       close
     end
   end
+
 
 end
 
