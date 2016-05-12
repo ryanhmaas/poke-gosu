@@ -1,4 +1,5 @@
 require 'gosu'
+require_relative 'character'
 
 class Game < Gosu::Window
   SCREEN_HEIGHT = 1000
@@ -8,7 +9,7 @@ class Game < Gosu::Window
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "Pokemon!"
     @character = Character.new
-    @background_image = Gosu::Image.new("media/space.png", :tileable => true)
+    @background_image = Gosu::Image.new("images/bg-start.jpg", :tileable => true)
   end
 
   #updates to game window
@@ -19,7 +20,7 @@ class Game < Gosu::Window
     if Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::GpRight then
       @character.turn_right
     end
-    @character.move
+    @character.move_char
   end
 
   def draw
