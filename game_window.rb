@@ -8,7 +8,8 @@ class Game < Gosu::Window
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "Pokemon!"
-    @character = Character.new("images/8bitcharles.png", 50, 50)
+    $window = self
+    @character = MainCharacter.new(50, 50)
     @background_image = Gosu::Image.new("images/bg-start.jpg", :tileable => true)
   end
 
