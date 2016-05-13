@@ -2,8 +2,10 @@ require 'gosu'
 require_relative 'main_character'
 
 class Game < Gosu::Window
+  # lol constants
   SCREEN_HEIGHT = 800
   SCREEN_WIDTH = 1100
+  GAME_LIMIT = 3
   RESTRICTED_X_LEFT = -13
   RESTRICTED_X_RIGHT = 1047
   RESTRICTED_Y_TOP = 0
@@ -15,10 +17,19 @@ class Game < Gosu::Window
     $window = self
     @character = MainCharacter.new(50, 50)
     @background_image = Gosu::Image.new(self, "images/background.png", :tileable => false)
+    @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 20)
   end
 
   #updates to game window
   def update
+    # increments the counter every second
+    @time = Gosu.milliseconds/1000
+    if @time > GAME_LIMIT then
+      # destroy timer object becoause game is over
+      @time = nil
+      @background_image = Gosu::Image.new(self, "images/game_over.png", false)
+    end
+
     if ((Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft) and canMoveX?(@character.get_x)) then
       @character.move_left
     end
@@ -36,9 +47,14 @@ class Game < Gosu::Window
   def draw
     @character.draw
     @background_image.draw(0,0,0)
+    draw_text(875, 110, @time.to_s, @large_font, 0xffff0000)
   end
 
+  def draw_text(x, y, text, font, color)
+    font.draw(text, x, y, 3, 1, 1, color)
+  end
 
+  private
   def button_down(id)
     case id
     when Gosu::KbUp
@@ -63,11 +79,9 @@ class Game < Gosu::Window
 
   private
   def canMoveY?(coordinate)
-    if (coordinate < RESTRICTED_Y_TOP) then
+    if (coordinate < RESTRICTED_Y_TOP || coordinate > RESTRICTED_Y_BOTTOM) then
       puts "STOP: Coordinate is " + coordinate.to_s
       puts "STOP: Top is " + RESTRICTED_Y_TOP.to_s
-      return false
-    elsif (coordinate > RESTRICTED_Y_BOTTOM) then
       return false
     else
       puts "Coordinate is " + coordinate.to_s
