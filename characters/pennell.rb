@@ -3,6 +3,8 @@ class DanPennell < Character
     @sprite = Gosu::Image.new("./images/fire-dp.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
+    @value = 10
+    @sayings = ["Actually...", "*pokes head around corner*"]
   end
 
   def draw
@@ -34,4 +36,11 @@ class DanPennell < Character
     return coordinate
   end
 
+  def value
+    return @value
+  end
+
+  def ending_interaction
+    return @sayings.sample(1)
+  end
 end

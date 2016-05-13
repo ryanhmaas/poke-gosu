@@ -3,6 +3,8 @@ class BrianSeidel < Character
     @sprite = Gosu::Image.new("./images/seidel.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
+    @value = 50
+    @sayings = ["", "", ""]
   end
 
   def draw
@@ -32,5 +34,13 @@ class BrianSeidel < Character
     coordinate = 0
     coordinate = rand(0..700)
     return coordinate
+  end
+
+  def value
+    return @value
+  end
+
+  def ending_interaction
+    return @sayings.sample(1)
   end
 end

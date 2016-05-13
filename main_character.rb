@@ -82,6 +82,7 @@ class MainCharacter
   def abduct(person)
     #code to remove person from board and gain attribute
     @score += person.value
+    person = nil
   end
 
   #contains players score

@@ -6,6 +6,8 @@ class ChrisBradley < Character
     @sprite = Gosu::Image.new("./images/ath-bradley.bmp")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
+    @value = 40
+    @sayings = ["Yo, you want Copper River?", "Can you help with HiLevel?", "I am Frodo Baggins"]
   end
 
   def draw
@@ -35,5 +37,13 @@ class ChrisBradley < Character
     coordinate = 0
     coordinate = rand(0..700)
     return coordinate
+  end
+
+  def value
+    return @value
+  end
+
+  def ending_interaction
+    return @sayings.sample(1)
   end
 end

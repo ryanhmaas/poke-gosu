@@ -23,4 +23,8 @@ class Character
   def get_y
     raise NotImplementedError, 'You must implement the get y method'
   end
+
+  def value
+        raise NotImplementedError, 'You must implement the value method'
+  end
 end

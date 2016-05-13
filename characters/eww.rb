@@ -3,6 +3,8 @@ class EricWard < Character
     @sprite = Gosu::Image.new("./images/angry-ward.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
+    @value = 50
+    @sayings = ["Nathan is a bitch", "F2TU"]
   end
 
   def draw
@@ -34,4 +36,11 @@ class EricWard < Character
     return coordinate
   end
 
+  def value
+    return @value
+  end
+
+  def ending_interaction
+    return @sayings.sample(1)
+  end
 end

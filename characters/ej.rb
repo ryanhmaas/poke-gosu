@@ -3,6 +3,8 @@ class EricJohnston < Character
     @sprite = Gosu::Image.new("./images/archie-ej.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
+    @value = 40
+    @sayings = ["", "", ""]
   end
 
   def draw
@@ -34,4 +36,11 @@ class EricJohnston < Character
     return coordinate
   end
 
+  def value
+    return @value
+  end
+
+  def ending_interaction
+    return @sayings.sample(1)
+  end
 end
