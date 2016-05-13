@@ -59,6 +59,8 @@ class Game < Gosu::Window
 
   def draw_text(x, y, text, font, color)
     font.draw(text, x, y, 3, 1, 1, color)
+<<<<<<< HEAD
+=======
   end
 
   private
@@ -70,6 +72,7 @@ class Game < Gosu::Window
       @time = nil
       @background_image = Gosu::Image.new(self, "images/game_over.png", false)
     end
+>>>>>>> dd6123f85ad7bc10e74dd6f6274c64f3275938b3
   end
 
   private
