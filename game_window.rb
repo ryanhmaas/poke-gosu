@@ -22,14 +22,17 @@ class Game < Gosu::Window
     @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
     @backmusic.play(true)
 
+    secondary_characters_array = Array.new
     @chars = Character.descendants.sample(5)
     @chars.each do |char|
       @char = char.new
-      puts @char.get_value
       @background_image.insert(@char.get_sprite, generateRandomXCoord, generateRandomYCoord)
+      secondary_characters_array.push(@char)
     end
+
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
-    assignCollisionMap(@character, @chars)
+
+    assignCollisionMap(@character, secondary_characters_array)
   end
 
   #updates to game window
@@ -120,7 +123,9 @@ class Game < Gosu::Window
 
   private
   def assignCollisionMap(mainChar, *otherCharacters)
-
+    otherCharacters.each_index do |otherChars|
+      # puts otherChars.get_x
+    end
   end
 
 
