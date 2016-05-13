@@ -70,6 +70,7 @@ class MainCharacter
     @sprite = @spriteArr[0]
     @y += @velocity
     @moving = true
+        puts @velocity.to_s
   end
 
   def get_x
@@ -82,7 +83,9 @@ class MainCharacter
 
   def abduct(person)
     #code to remove person from board and gain attribute
-    @velocity += person[:velocity_bonus]
+    if((@velocity + @velocity + person[:velocity_bonus]) < 20) then
+      @velocity += person[:velocity_bonus]
+    end
     person[:name].value = 0
     person[:name].sprite = nil
   end
