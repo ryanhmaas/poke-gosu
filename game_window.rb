@@ -9,8 +9,7 @@ class Game < Gosu::Window
   GAME_LIMIT = 300
   RESTRICTED_X_LEFT = -13
   RESTRICTED_X_RIGHT = 1047
-  RESTRICTED_Y_TOP = 0
-  RESTRICTED_Y_BOTTOM = 700
+
 
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
@@ -20,16 +19,16 @@ class Game < Gosu::Window
     @background_image = Gosu::Image.new(self, "images/background.png", :tileable => false)
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
     @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
-    @backmusic.play(true)
-
+    # @backmusic.play(true)
+    # create an array to contain each instance of the spawned players
     @isDrawn = false
     @chars = Character.descendants.sample(5)
     @actualChars = []
     @chars.each do |char|
       @actualChars.push(char.new)
     end
+
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
-    assignCollisionMap(@character, @chars)
   end
 
   #updates to game window
@@ -37,19 +36,31 @@ class Game < Gosu::Window
 
     getTimer
 
+    createNPCMap(@actualChars)
+
     if ((Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft) and canMoveX?(@character.get_x)) then
       @character.move_left
     end
     if ((Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::GpRight) and canMoveX?(@character.get_x)) then
       @character.move_right
     end
-    if ((Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::GpUp) and canMoveY?(@character.get_y)) then
+    if ((Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::GpUp)) then
       @character.move_up
     end
-    if ((Gosu::button_down? Gosu::KbDown or Gosu::button_down? Gosu::GpDown) and canMoveY?(@character.get_y)) then
+    if ((Gosu::button_down? Gosu::KbDown or Gosu::button_down? Gosu::GpDown)) then
       @character.move_down
     end
 
+  end
+
+  def createNPCMap(players)
+    obj = {}
+    new_array = []
+    players.each do |index|
+      obj = {:name => index, :x_coord => index.get_x, :y_coord => index.get_y}
+      new_array << obj
+    end
+    detectCollision(@character, new_array)
   end
 
   def draw
@@ -57,9 +68,10 @@ class Game < Gosu::Window
     @background_image.draw(0,0,0)
     draw_text(875, 95, @time.to_s, @large_font, 0xffff0000)
     @actualChars.each do |char|
-      #@char.create(@background_image, @char.get_sprite, generateRandomXCoord, generateRandomYCoord)
       @sprite_img = char.get_sprite
-      @sprite_img.draw(char.get_x, char.get_y, 5)
+      if @sprite_img != nil
+        @sprite_img.draw(char.get_x, char.get_y, 5)
+      end
     end
   end
 
@@ -115,17 +127,14 @@ class Game < Gosu::Window
   end
 
   private
-  def canMoveY?(coordinate)
-    if (coordinate < RESTRICTED_Y_TOP || coordinate > RESTRICTED_Y_BOTTOM) then
-      return false
-    else
-      return true
+  def detectCollision(mainChar, otherCharacters)
+    otherCharacters.each do |player|
+      if ((player[:x_coord].between?(mainChar.get_x - 7, mainChar.get_x + 7)) && (player[:y_coord].between?(mainChar.get_y - 7, mainChar.get_y + 7))) then
+        mainChar.abduct(player)
+      else
+        # do nothing
+      end
     end
-  end
-
-  private
-  def assignCollisionMap(mainChar, *otherCharacters)
-
   end
 
 end

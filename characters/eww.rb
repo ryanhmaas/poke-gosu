@@ -1,5 +1,7 @@
 class EricWard < Character
+  attr_accessor :sprite
   def initialize
+
     @sprite = Gosu::Image.new("./images/angry-ward.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
@@ -23,6 +25,10 @@ class EricWard < Character
 
   def get_y
     return @y
+  end
+
+  def get_name
+    return @name
   end
 
   def generateRandomXCoord

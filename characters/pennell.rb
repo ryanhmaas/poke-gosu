@@ -1,5 +1,7 @@
 class DanPennell < Character
+  attr_accessor :sprite
   def initialize
+
     @sprite = Gosu::Image.new("./images/fire-dp.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
@@ -25,6 +27,11 @@ class DanPennell < Character
     return @y
   end
 
+
+  def get_name
+    return @name
+  end
+
   def generateRandomXCoord
     coordinate = 0
     coordinate = rand(-13..1047)
@@ -44,4 +51,5 @@ class DanPennell < Character
   def ending_interaction
     return @sayings.sample(1)
   end
+
 end

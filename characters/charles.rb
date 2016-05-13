@@ -1,4 +1,5 @@
 class CharlesTennent < Character
+  attr_accessor :sprite
 
   def initialize
     @sprite = Gosu::Image.new("./images/hiker-charles.png")
@@ -24,6 +25,10 @@ class CharlesTennent < Character
 
   def get_y
     return @y
+  end
+
+  def get_name
+    return @name
   end
 
   def generateRandomXCoord

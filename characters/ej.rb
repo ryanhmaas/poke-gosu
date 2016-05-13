@@ -1,4 +1,5 @@
 class EricJohnston < Character
+  attr_accessor :sprite
   def initialize
     @sprite = Gosu::Image.new("./images/archie-ej.png")
     @x = generateRandomXCoord

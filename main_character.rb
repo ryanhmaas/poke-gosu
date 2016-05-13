@@ -80,11 +80,14 @@ class MainCharacter
     return @y
   end
 
+
   def abduct(person)
     #code to remove person from board and gain attribute
     @score += person.get_value
     @velocity += person.get_velocity_bonus
     person = nil
+    # @score += person.value
+    person[:name].sprite = nil
   end
 
   #contains players score

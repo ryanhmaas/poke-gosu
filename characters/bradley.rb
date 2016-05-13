@@ -1,8 +1,9 @@
 require_relative 'character'
 
 class ChrisBradley < Character
+  attr_accessor :sprite
   def initialize
-    puts "Initializing Person instance #{object_id}"
+
     @sprite = Gosu::Image.new("./images/ath-bradley.bmp")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
@@ -26,6 +27,11 @@ class ChrisBradley < Character
 
   def get_y
     return @y
+  end
+
+
+  def get_name
+    return @name
   end
 
   def generateRandomXCoord
