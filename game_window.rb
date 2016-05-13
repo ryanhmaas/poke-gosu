@@ -6,7 +6,7 @@ class Game < Gosu::Window
   # lol constants
   SCREEN_HEIGHT = 800
   SCREEN_WIDTH = 1100
-  GAME_LIMIT = 300
+  GAME_LIMIT = 30
   RESTRICTED_X_LEFT = -13
   RESTRICTED_X_RIGHT = 1047
 
@@ -20,7 +20,8 @@ class Game < Gosu::Window
     # create an array to contain each instance of the spawned players
     populateMap
     @score  = 0
-    @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
+    @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 17)
+    @small_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 20)
     @font = Gosu::Font.new(18)
   end
 
@@ -57,10 +58,11 @@ class Game < Gosu::Window
   end
 
   def draw
+
     @character.draw
     @background_image.draw(0,0,0)
-    draw_text(875, 95, @score, @large_font, 0xffff0000)
-    # draw_text(875, 95, @time.to_s, @large_font, 0xffff0000)
+    draw_text(750, 95, @score.to_s + " " + "points", @large_font, 0xffff0000)
+    draw_text(800, 140, @time.to_s, @small_font, 0xffff0000)
     @actualChars.each do |char|
       @sprite_img = char.get_sprite
       if @sprite_img != nil
@@ -140,7 +142,8 @@ class Game < Gosu::Window
   private
   def detectCollision(mainChar, otherCharacters)
     otherCharacters.each do |player|
-      if ((player[:x_coord].between?(mainChar.get_x - 7, mainChar.get_x + 7)) && (player[:y_coord].between?(mainChar.get_y - 7, mainChar.get_y + 7))) then
+      if ((player[:x_coord].between?(mainChar.get_x - 10, mainChar.get_x + 10)) && (player[:y_coord].between?(mainChar.get_y - 10, mainChar.get_y + 10))) then
+        puts "hit"
         @score += player[:value]
         mainChar.abduct(player)
       else
