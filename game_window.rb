@@ -6,7 +6,7 @@ class Game < Gosu::Window
   # lol constants
   SCREEN_HEIGHT = 800
   SCREEN_WIDTH = 1100
-  GAME_LIMIT = 0
+  GAME_LIMIT = 300
   RESTRICTED_X_LEFT = -13
   RESTRICTED_X_RIGHT = 1047
   RESTRICTED_Y_TOP = 0
@@ -19,16 +19,17 @@ class Game < Gosu::Window
     @character = MainCharacter.new(50, 50)
     @background_image = Gosu::Image.new(self, "images/background.png", :tileable => false)
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
-    puts @background_image
     @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
     @backmusic.play(true)
 
     @chars = Character.descendants.sample(5)
     @chars.each do |char|
       @char = char.new
+      puts @char.get_value
       @background_image.insert(@char.get_sprite, generateRandomXCoord, generateRandomYCoord)
     end
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
+    assignCollisionMap(@character, @chars)
   end
 
   #updates to game window
@@ -90,14 +91,12 @@ class Game < Gosu::Window
   def generateRandomXCoord
     coordinate = 0
     coordinate = rand(RESTRICTED_X_LEFT..RESTRICTED_X_RIGHT)
-    puts "X: " + coordinate.to_s
     return coordinate
   end
 
   def generateRandomYCoord
     coordinate = 0
     coordinate = rand(RESTRICTED_Y_TOP..RESTRICTED_Y_BOTTOM)
-    puts "Y: " + coordinate.to_s
     return coordinate
   end
 
@@ -117,6 +116,11 @@ class Game < Gosu::Window
     else
       return true
     end
+  end
+
+  private
+  def assignCollisionMap(mainChar, *otherCharacters)
+
   end
 
 

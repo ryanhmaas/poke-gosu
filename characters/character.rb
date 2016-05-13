@@ -15,4 +15,5 @@ class Character
   def get_sprite
     raise NotImplementedError, 'You must implement the get sprite method'
   end
+  
 end
