@@ -4,7 +4,7 @@ class Character
     raise NotImplementedError, 'You must implement the initialize method'
   end
 
-  def create
+  def draw
     raise NotImplementedError, 'You must implement the create method'
   end
 
@@ -26,6 +26,10 @@ class Character
 
   def get_name
     raise NotImplementedError, 'You must implement the get name method'
+  end
+
+  def value
+        raise NotImplementedError, 'You must implement the value method'
   end
 
 end

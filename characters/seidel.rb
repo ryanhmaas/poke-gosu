@@ -1,16 +1,17 @@
 class BrianSeidel < Character
+  attr_accessor :sprite
   def initialize
-    @spriteArr = Gosu::Image.load_tiles($window, "./images/overworld_sprites.png", 32, 32, false)
-    @sprite = @spriteArr[60]
-    @x = 0
-    @y = 0
-    @name = "Brian Seidel"
+    @sprite = Gosu::Image.new("./images/seidel.png")
+    @x = generateRandomXCoord
+    @y = generateRandomYCoord
+    @value = 50
+    @sayings = ["", "", ""]
+
   end
 
-  def create(bg,src,x,y)
-    bg.insert(src,x,y)
-    @x = x
-    @y = y
+  def draw
+    #bg.insert(src,x,y)
+    @sprite.draw(@x,@y,5)
   end
 
   def get_sprite
@@ -25,7 +26,29 @@ class BrianSeidel < Character
     return @y
   end
 
+
   def get_name
     return @name
+  end
+
+  def generateRandomXCoord
+    coordinate = 0
+    coordinate = rand(-13..1047)
+    return coordinate
+  end
+
+  def generateRandomYCoord
+    coordinate = 0
+    coordinate = rand(0..700)
+    return coordinate
+  end
+
+  def value
+    return @value
+  end
+
+  def ending_interaction
+    return @sayings.sample(1)
+
   end
 end
