@@ -10,24 +10,16 @@ class Game < Gosu::Window
   RESTRICTED_X_LEFT = -13
   RESTRICTED_X_RIGHT = 1047
 
-
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "WSP Capture"
     $window = self
     @character = MainCharacter.new(50, 50)
     @background_image = Gosu::Image.new(self, "images/background.png", :tileable => false)
-    @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
-    @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
-    # @backmusic.play(true)
+    startMusic
     # create an array to contain each instance of the spawned players
-    @isDrawn = false
-    @chars = Character.descendants.sample(5)
-    @actualChars = []
-    @chars.each do |char|
-      @actualChars.push(char.new)
-    end
-
+    populateMap
+    @score  = 0
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
   end
 
@@ -57,7 +49,7 @@ class Game < Gosu::Window
     obj = {}
     new_array = []
     players.each do |index|
-      obj = {:name => index, :x_coord => index.get_x, :y_coord => index.get_y, :velocity_bonus => index.get_velocity_bonus}
+      obj = {:name => index, :x_coord => index.get_x, :y_coord => index.get_y, :velocity_bonus => index.get_velocity_bonus, :value => index.value}
       new_array << obj
     end
     detectCollision(@character, new_array)
@@ -66,7 +58,8 @@ class Game < Gosu::Window
   def draw
     @character.draw
     @background_image.draw(0,0,0)
-    draw_text(875, 95, @time.to_s, @large_font, 0xffff0000)
+    # draw_text(875, 95, @time.to_s, @large_font, 0xffff0000)
+    draw_text(875, 95, @score, @large_font, 0xffff0000)
     @actualChars.each do |char|
       @sprite_img = char.get_sprite
       if @sprite_img != nil
@@ -127,9 +120,25 @@ class Game < Gosu::Window
   end
 
   private
+  def startMusic
+    # @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
+    # @backmusic.play(true)
+  end
+
+  private
+  def populateMap
+    @chars = Character.descendants.sample(5)
+    @actualChars = []
+    @chars.each do |char|
+      @actualChars.push(char.new)
+    end
+  end
+
+  private
   def detectCollision(mainChar, otherCharacters)
     otherCharacters.each do |player|
       if ((player[:x_coord].between?(mainChar.get_x - 7, mainChar.get_x + 7)) && (player[:y_coord].between?(mainChar.get_y - 7, mainChar.get_y + 7))) then
+        @score += player[:value]
         mainChar.abduct(player)
       else
         # do nothing

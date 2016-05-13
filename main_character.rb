@@ -15,7 +15,6 @@ class MainCharacter
     @move_x = 0
     @move_y = 0
     @moving = false
-    @score  = 0
     @velocity = 5
   end
 
@@ -80,14 +79,10 @@ class MainCharacter
     return @y
   end
 
-
   def abduct(person)
     #code to remove person from board and gain attribute
-    #@score += person[:velocity_bonus]
     @velocity += person[:velocity_bonus]
-    puts @velocity
-    #person = nil
-    # @score += person.value
+    person[:name].value = 0
     person[:name].sprite = nil
   end
 

@@ -1,9 +1,9 @@
 require_relative 'character'
 
 class ChrisBradley < Character
-  attr_accessor :sprite, :velocity_bonus
-  def initialize
+  attr_accessor :sprite, :velocity_bonus, :value
 
+  def initialize
     @sprite = Gosu::Image.new("./images/ath-bradley.bmp")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
@@ -48,6 +48,10 @@ class ChrisBradley < Character
 
   def value
     return @value
+  end
+
+  def set_value=(value)
+    @value = value
   end
 
   def ending_interaction

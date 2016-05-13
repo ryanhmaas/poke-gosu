@@ -1,11 +1,13 @@
 class EricJohnston < Character
-  attr_accessor :sprite, :velocity_bonus
+  attr_accessor :sprite, :velocity_bonus, :value
+  
   def initialize
     @sprite = Gosu::Image.new("./images/archie-ej.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
     @value = 40
     @sayings = ["", "", ""]
+    @velocity_bonus = 10
   end
 
   def draw
@@ -39,6 +41,10 @@ class EricJohnston < Character
 
   def value
     return @value
+  end
+
+  def set_value(value)
+    @value = value
   end
 
   def ending_interaction

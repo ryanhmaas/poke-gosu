@@ -1,5 +1,5 @@
 class CharlesTennent < Character
-  attr_accessor :sprite, :velocity_bonus
+  attr_accessor :sprite, :velocity_bonus, :value
 
   def initialize
     @sprite = Gosu::Image.new("./images/hiker-charles.png")
@@ -45,6 +45,10 @@ class CharlesTennent < Character
 
   def value
     return @value
+  end
+
+  def set_value=(value)
+    @value = value
   end
 
   def ending_interaction

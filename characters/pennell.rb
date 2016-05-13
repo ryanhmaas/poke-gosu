@@ -1,7 +1,7 @@
 class DanPennell < Character
-  attr_accessor :sprite, :velocity_bonus
-  def initialize
+  attr_accessor :sprite, :velocity_bonus, :value
 
+  def initialize
     @sprite = Gosu::Image.new("./images/fire-dp.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
@@ -46,6 +46,10 @@ class DanPennell < Character
 
   def value
     return @value
+  end
+
+  def set_value(value)
+    @value = value
   end
 
   def ending_interaction

@@ -1,7 +1,7 @@
 class EricWard < Character
-  attr_accessor :sprite, :velocity_bonus
-  def initialize
+  attr_accessor :sprite, :velocity_bonus, :value
 
+  def initialize
     @sprite = Gosu::Image.new("./images/angry-ward.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
@@ -45,6 +45,10 @@ class EricWard < Character
 
   def value
     return @value
+  end
+
+  def set_value(value)
+    @value = value
   end
 
   def ending_interaction

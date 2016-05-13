@@ -1,5 +1,6 @@
 class BrianSeidel < Character
-  attr_accessor :sprite, :velocity_bonus
+  attr_accessor :sprite, :velocity_bonus, :value
+
   def initialize
     @sprite = Gosu::Image.new("./images/seidel.png")
     @x = generateRandomXCoord
@@ -26,7 +27,6 @@ class BrianSeidel < Character
     return @y
   end
 
-
   def get_name
     return @name
   end
@@ -45,6 +45,10 @@ class BrianSeidel < Character
 
   def value
     return @value
+  end
+
+  def set_value(value)
+    @value = value
   end
 
   def ending_interaction
