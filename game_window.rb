@@ -1,5 +1,6 @@
 require 'gosu'
 require_relative 'main_character'
+Dir[File.dirname(__FILE__) + '/characters/*.rb'].each {|file| require file }
 
 class Game < Gosu::Window
   SCREEN_HEIGHT = 800
@@ -15,6 +16,14 @@ class Game < Gosu::Window
     $window = self
     @character = MainCharacter.new(50, 50)
     @background_image = Gosu::Image.new(self, "images/background.png", :tileable => false)
+    @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
+    @backmusic.play(true)
+
+    @chars = Character.descendants.sample(5)
+    @chars.each do |char|
+      @char = char.new
+      @char.create(@char.get_sprite, generateRandomXCoord, generateRandomYCoord)
+    end
   end
 
   #updates to game window
@@ -36,8 +45,10 @@ class Game < Gosu::Window
   def draw
     @character.draw
     @background_image.draw(0,0,0)
-  end
+    @chars.each do |char|
 
+    end
+  end
 
   def button_down(id)
     case id
@@ -50,6 +61,21 @@ class Game < Gosu::Window
     when Gosu::KbEscape
       close
     end
+  end
+
+
+  def generateRandomXCoord
+    coordinate = 0
+    coordinate = rand(RESTRICTED_X_LEFT..RESTRICTED_X_RIGHT)
+    puts "X: " + coordinate.to_s
+    return coordinate
+  end
+
+  def generateRandomYCoord
+    coordinate = 0
+    coordinate = rand(RESTRICTED_Y_TOP..RESTRICTED_Y_BOTTOM)
+    puts "Y: " + coordinate.to_s
+    return coordinate
   end
 
   private
