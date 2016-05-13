@@ -6,8 +6,8 @@ class BrianSeidel < Character
     @y = 0
   end
 
-  def create(src,x,y)
-    @sprite.insert(src,x,y)
+  def create(bg,src,x,y)
+    bg.insert(src,x,y)
     @x = x
     @y = y
   end

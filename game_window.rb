@@ -6,7 +6,7 @@ class Game < Gosu::Window
   # lol constants
   SCREEN_HEIGHT = 800
   SCREEN_WIDTH = 1100
-  GAME_LIMIT = 0
+  GAME_LIMIT = 100
   RESTRICTED_X_LEFT = -13
   RESTRICTED_X_RIGHT = 1047
   RESTRICTED_Y_TOP = 0
@@ -26,7 +26,8 @@ class Game < Gosu::Window
     @chars = Character.descendants.sample(5)
     @chars.each do |char|
       @char = char.new
-      @background_image.insert(@char.get_sprite, generateRandomXCoord, generateRandomYCoord)
+      @char.create(@background_image, @char.get_sprite, generateRandomXCoord, generateRandomYCoord)
+      #@char.draw
     end
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
   end
