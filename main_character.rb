@@ -16,6 +16,7 @@ class MainCharacter
     @move_y = 0
     @moving = false
     @velocity = 5
+    @text = Gosu::Font.new(18)
   end
 
   def draw

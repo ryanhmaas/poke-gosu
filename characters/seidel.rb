@@ -1,13 +1,14 @@
 class BrianSeidel < Character
-  attr_accessor :sprite, :velocity_bonus, :value
+  attr_accessor :sprite, :velocity_bonus, :text, :saying, :value
 
   def initialize
     @sprite = Gosu::Image.new("./images/seidel.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
     @value = 50
-    @sayings = ["", "", ""]
+    @saying = ["", "", ""].sample(1)
     @velocity_bonus = 5
+    @text = Gosu::Font.new(18)
   end
 
   def draw
@@ -53,10 +54,17 @@ class BrianSeidel < Character
 
   def ending_interaction
     return @sayings.sample(1)
+  end
 
+  def get_saying
+    return @saying
   end
 
   def get_velocity_bonus
     return @velocity_bonus
+  end
+
+  def get_text
+    return @text
   end
 end

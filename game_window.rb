@@ -21,6 +21,7 @@ class Game < Gosu::Window
     populateMap
     @score  = 0
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
+    @font = Gosu::Font.new(18)
   end
 
   #updates to game window
@@ -49,7 +50,7 @@ class Game < Gosu::Window
     obj = {}
     new_array = []
     players.each do |index|
-      obj = {:name => index, :x_coord => index.get_x, :y_coord => index.get_y, :velocity_bonus => index.get_velocity_bonus, :value => index.value}
+      obj = {:name => index, :x_coord => index.get_x, :y_coord => index.get_y, :velocity_bonus => index.get_velocity_bonus, :saying => index.get_saying, :value => index.value}
       new_array << obj
     end
     detectCollision(@character, new_array)
@@ -58,14 +59,16 @@ class Game < Gosu::Window
   def draw
     @character.draw
     @background_image.draw(0,0,0)
-    # draw_text(875, 95, @time.to_s, @large_font, 0xffff0000)
     draw_text(875, 95, @score, @large_font, 0xffff0000)
+    # draw_text(875, 95, @time.to_s, @large_font, 0xffff0000)
     @actualChars.each do |char|
       @sprite_img = char.get_sprite
       if @sprite_img != nil
         @sprite_img.draw(char.get_x, char.get_y, 5)
+        @font.draw(char.get_saying, char.get_x, char.get_y + 64, 3, 1,1, 0xffff0000)
       end
     end
+
   end
 
   def draw_text(x, y, text, font, color)
