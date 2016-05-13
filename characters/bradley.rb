@@ -3,14 +3,14 @@ require_relative 'character'
 class ChrisBradley < Character
   def initialize
     puts "Initializing Person instance #{object_id}"
-    @spriteArr = Gosu::Image.load_tiles($window, "./images/overworld_sprites.png", 32, 32, false)
-    @sprite = @spriteArr[60]
+    @sprite = Gosu::Image.new("./images/ath-bradley.bmp")
     @x = 0
     @y = 0
+    @name = "Chris Bradley"
   end
 
-  def create(src,x,y)
-    @sprite.insert(src,x,y)
+  def create(bg,src,x,y)
+    bg.insert(src,x,y)
     @x = x
     @y = y
   end
@@ -25,5 +25,9 @@ class ChrisBradley < Character
 
   def get_y
     return @y
+  end
+
+  def get_name
+    return @name
   end
 end

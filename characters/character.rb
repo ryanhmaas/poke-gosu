@@ -24,4 +24,8 @@ class Character
     raise NotImplementedError, 'You must implement the get y method'
   end
 
+  def get_name
+    raise NotImplementedError, 'You must implement the get name method'
+  end
+
 end

@@ -6,11 +6,12 @@ class Game < Gosu::Window
   # lol constants
   SCREEN_HEIGHT = 800
   SCREEN_WIDTH = 1100
-  GAME_LIMIT = 300
+  GAME_LIMIT = 3
   RESTRICTED_X_LEFT = -13
   RESTRICTED_X_RIGHT = 1047
   RESTRICTED_Y_TOP = 0
   RESTRICTED_Y_BOTTOM = 700
+
 
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
@@ -20,19 +21,18 @@ class Game < Gosu::Window
     @background_image = Gosu::Image.new(self, "images/background.png", :tileable => false)
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
     @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
-    @backmusic.play(true)
+    # @backmusic.play(true)
 
-    secondary_characters_array = Array.new
+    # create an array to contain each instance of the spawned players
     @chars = Character.descendants.sample(5)
     @chars.each do |char|
       @char = char.new
-      @background_image.insert(@char.get_sprite, generateRandomXCoord, generateRandomYCoord)
-      secondary_characters_array.push(@char)
+      @char.create(@background_image, @char.get_sprite, generateRandomXCoord, generateRandomYCoord)
     end
 
-    @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
+    createNPCMap(@chars)
 
-    assignCollisionMap(@character, secondary_characters_array)
+    @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
   end
 
   #updates to game window
@@ -55,10 +55,26 @@ class Game < Gosu::Window
 
   end
 
+  def createNPCMap(players)
+    secondary_characters_array = []
+    secondary_characters_array.push(players)
+
+    # wow this is overkill now...
+    obj = {}
+    new_array = []
+    secondary_characters_array.each do |index|
+      puts index
+      obj = {:name => index.get_name, :x_coord => index.get_x, :y_coord => index.get_y}
+      new_array << obj
+    end
+
+    detectCollision(players, new_array)
+  end
+
   def draw
     @character.draw
     @background_image.draw(0,0,0)
-    draw_text(875, 95, @time.to_s, @large_font, 0xffff0000)
+    draw_text(855, 95, @time.to_s, @large_font, 0xffff0000)
   end
 
   def draw_text(x, y, text, font, color)
@@ -122,9 +138,13 @@ class Game < Gosu::Window
   end
 
   private
-  def assignCollisionMap(mainChar, *otherCharacters)
-    otherCharacters.each_index do |otherChars|
-      # puts otherChars.get_x
+  def detectCollision(mainChar, otherCharacters)
+    otherCharacters.each do |player|
+      if ((player[:x_coord] == mainChar.get_x) && (player[:y_coord] == mainChar.get_y)) then
+        puts "hit"
+      else
+        puts "miss"
+      end
     end
   end
 

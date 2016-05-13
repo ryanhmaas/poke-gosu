@@ -4,10 +4,11 @@ class BrianSeidel < Character
     @sprite = @spriteArr[60]
     @x = 0
     @y = 0
+    @name = "Brian Seidel"
   end
 
-  def create(src,x,y)
-    @sprite.insert(src,x,y)
+  def create(bg,src,x,y)
+    bg.insert(src,x,y)
     @x = x
     @y = y
   end
@@ -22,5 +23,9 @@ class BrianSeidel < Character
 
   def get_y
     return @y
+  end
+
+  def get_name
+    return @name
   end
 end
