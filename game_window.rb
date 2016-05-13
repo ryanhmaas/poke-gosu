@@ -24,7 +24,7 @@ class Game < Gosu::Window
     @chars = Character.descendants.sample(5)
     @chars.each do |char|
       @char = char.new
-      @char.create(@char.get_sprite, generateRandomXCoord, generateRandomYCoord)
+      @background_image.insert(@char.get_sprite, generateRandomXCoord, generateRandomYCoord)
     end
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 20)
   end
@@ -61,7 +61,6 @@ class Game < Gosu::Window
 
   def draw_text(x, y, text, font, color)
     font.draw(text, x, y, 3, 1, 1, color)
->>>>>>> 876f82e212a1e0f3391060d3e6616fe9cf2f58b2
   end
 
   private
