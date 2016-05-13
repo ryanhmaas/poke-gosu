@@ -6,7 +6,6 @@ class Game < Gosu::Window
   # lol constants
   SCREEN_HEIGHT = 800
   SCREEN_WIDTH = 1100
-  GAME_LIMIT = 100
   GAME_LIMIT = 300
   RESTRICTED_X_LEFT = -13
   RESTRICTED_X_RIGHT = 1047
@@ -23,12 +22,11 @@ class Game < Gosu::Window
     @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
     @backmusic.play(true)
 
+    @isDrawn = false
     @chars = Character.descendants.sample(5)
+    @actualChars = []
     @chars.each do |char|
-      @char = char.new
-      @char.create(@background_image, @char.get_sprite, generateRandomXCoord, generateRandomYCoord)
-      #@char.draw
-      puts @char.get_value
+      @actualChars.push(char.new)
     end
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
     assignCollisionMap(@character, @chars)
@@ -58,6 +56,11 @@ class Game < Gosu::Window
     @character.draw
     @background_image.draw(0,0,0)
     draw_text(875, 95, @time.to_s, @large_font, 0xffff0000)
+    @actualChars.each do |char|
+      #@char.create(@background_image, @char.get_sprite, generateRandomXCoord, generateRandomYCoord)
+      @sprite_img = char.get_sprite
+      @sprite_img.draw(char.get_x, char.get_y, 5)
+    end
   end
 
   def draw_text(x, y, text, font, color)
@@ -124,7 +127,6 @@ class Game < Gosu::Window
   def assignCollisionMap(mainChar, *otherCharacters)
 
   end
-
 
 end
 

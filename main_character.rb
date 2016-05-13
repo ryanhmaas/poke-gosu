@@ -15,6 +15,7 @@ class MainCharacter
     @move_x = 0
     @move_y = 0
     @moving = false
+    @score  = 0
   end
 
   def draw
@@ -80,5 +81,11 @@ class MainCharacter
 
   def abduct(person)
     #code to remove person from board and gain attribute
+    @score += person.value
+  end
+
+  #contains players score
+  def get_score
+    return @score
   end
 end
