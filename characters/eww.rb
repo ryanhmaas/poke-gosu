@@ -1,5 +1,5 @@
 class EricWard < Character
-  attr_accessor :sprite
+  attr_accessor :sprite, :velocity_bonus
   def initialize
 
     @sprite = Gosu::Image.new("./images/angry-ward.png")

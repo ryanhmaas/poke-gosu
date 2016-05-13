@@ -1,5 +1,5 @@
 class DanPennell < Character
-  attr_accessor :sprite
+  attr_accessor :sprite, :velocity_bonus
   def initialize
 
     @sprite = Gosu::Image.new("./images/fire-dp.png")
@@ -50,6 +50,11 @@ class DanPennell < Character
 
   def ending_interaction
     return @sayings.sample(1)
+  end
+
+
+  def get_velocity_bonus
+    return @velocity_bonus
   end
 
 end

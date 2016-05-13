@@ -57,7 +57,7 @@ class Game < Gosu::Window
     obj = {}
     new_array = []
     players.each do |index|
-      obj = {:name => index, :x_coord => index.get_x, :y_coord => index.get_y}
+      obj = {:name => index, :x_coord => index.get_x, :y_coord => index.get_y, :velocity_bonus => index.get_velocity_bonus}
       new_array << obj
     end
     detectCollision(@character, new_array)

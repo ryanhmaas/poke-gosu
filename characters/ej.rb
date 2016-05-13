@@ -1,5 +1,5 @@
 class EricJohnston < Character
-  attr_accessor :sprite
+  attr_accessor :sprite, :velocity_bonus
   def initialize
     @sprite = Gosu::Image.new("./images/archie-ej.png")
     @x = generateRandomXCoord

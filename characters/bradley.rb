@@ -1,7 +1,7 @@
 require_relative 'character'
 
 class ChrisBradley < Character
-  attr_accessor :sprite
+  attr_accessor :sprite, :velocity_bonus
   def initialize
 
     @sprite = Gosu::Image.new("./images/ath-bradley.bmp")
