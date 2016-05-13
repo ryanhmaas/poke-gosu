@@ -8,6 +8,7 @@ class ChrisBradley < Character
     @y = generateRandomYCoord
     @value = 40
     @sayings = ["Yo, you want Copper River?", "Can you help with HiLevel?", "I am Frodo Baggins"]
+    @velocity_bonus = -4
   end
 
   def draw
@@ -45,5 +46,9 @@ class ChrisBradley < Character
 
   def ending_interaction
     return @sayings.sample(1)
+  end
+
+  def get_velocity_bonus
+    return @velocity_bonus
   end
 end

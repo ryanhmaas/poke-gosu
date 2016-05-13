@@ -5,6 +5,7 @@ class BrianSeidel < Character
     @y = generateRandomYCoord
     @value = 50
     @sayings = ["", "", ""]
+    @velocity_bonus = 5
   end
 
   def draw
@@ -42,5 +43,9 @@ class BrianSeidel < Character
 
   def ending_interaction
     return @sayings.sample(1)
+  end
+
+  def get_velocity_bonus
+    return @velocity_bonus
   end
 end

@@ -5,6 +5,7 @@ class DanPennell < Character
     @y = generateRandomYCoord
     @value = 10
     @sayings = ["Actually...", "*pokes head around corner*"]
+    @velocity_bonus = -2
   end
 
   def draw

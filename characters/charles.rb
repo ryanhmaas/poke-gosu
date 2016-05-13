@@ -6,6 +6,7 @@ class CharlesTennent < Character
     @y = generateRandomYCoord
     @value = 20
     @sayings = ["*humming intensifies*", ""]
+    @velocity_bonus = 1
   end
 
   def draw
@@ -43,5 +44,9 @@ class CharlesTennent < Character
 
   def ending_interaction
     return @sayings.sample(1)
+  end
+
+  def get_velocity_bonus
+    return @velocity_bonus
   end
 end

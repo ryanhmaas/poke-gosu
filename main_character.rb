@@ -16,6 +16,7 @@ class MainCharacter
     @move_y = 0
     @moving = false
     @score  = 0
+    @velocity = 5
   end
 
   def draw
@@ -49,25 +50,25 @@ class MainCharacter
 
   def move_left
     @sprite = @spriteArr[4]
-    @x -= 5
+    @x -= @velocity
     @moving = true
   end
 
   def move_right
     @sprite = @spriteArr[8]
-    @x += 5
+    @x += @velocity
     @moving = true
   end
 
   def move_up
     @sprite = @spriteArr[12]
-    @y -= 5
+    @y -= @velocity
     @moving = true
   end
 
   def move_down
     @sprite = @spriteArr[0]
-    @y += 5
+    @y += @velocity
     @moving = true
   end
 
@@ -81,7 +82,8 @@ class MainCharacter
 
   def abduct(person)
     #code to remove person from board and gain attribute
-    @score += person.value
+    @score += person.get_value
+    @velocity += person.get_velocity_bonus
     person = nil
   end
 

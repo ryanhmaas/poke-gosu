@@ -5,6 +5,7 @@ class EricWard < Character
     @y = generateRandomYCoord
     @value = 50
     @sayings = ["Nathan is a bitch", "F2TU"]
+    @velocity_bonus = 10
   end
 
   def draw
@@ -42,5 +43,9 @@ class EricWard < Character
 
   def ending_interaction
     return @sayings.sample(1)
+  end
+
+  def get_velocity_bonus
+    return @velocity_bonus
   end
 end

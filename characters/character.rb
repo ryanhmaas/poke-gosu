@@ -25,6 +25,10 @@ class Character
   end
 
   def value
-        raise NotImplementedError, 'You must implement the value method'
+    raise NotImplementedError, 'You must implement the value method'
+  end
+
+  def get_velocity_bonus
+    raise NotImplementedError, 'You must implement the get sprite method'
   end
 end
