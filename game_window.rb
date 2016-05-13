@@ -6,7 +6,7 @@ class Game < Gosu::Window
   # lol constants
   SCREEN_HEIGHT = 800
   SCREEN_WIDTH = 1100
-  GAME_LIMIT = 30
+  GAME_LIMIT = 20
   RESTRICTED_X_LEFT = -13
   RESTRICTED_X_RIGHT = 1047
 
@@ -67,7 +67,7 @@ class Game < Gosu::Window
       @sprite_img = char.get_sprite
       if @sprite_img != nil
         @sprite_img.draw(char.get_x, char.get_y, 5)
-        @font.draw(char.get_saying, char.get_x, char.get_y + 64, 3, 1,1, 0xffff0000)
+        @font.draw(char.get_saying, char.get_x, char.get_y + 64, 3, 1,1, 0xffffffff)
       end
     end
 
@@ -143,7 +143,6 @@ class Game < Gosu::Window
   def detectCollision(mainChar, otherCharacters)
     otherCharacters.each do |player|
       if ((player[:x_coord].between?(mainChar.get_x - 10, mainChar.get_x + 10)) && (player[:y_coord].between?(mainChar.get_y - 10, mainChar.get_y + 10))) then
-        puts "hit"
         @score += player[:value]
         mainChar.abduct(player)
       else

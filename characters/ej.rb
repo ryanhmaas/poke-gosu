@@ -6,7 +6,7 @@ class EricJohnston < Character
     @x = generateRandomXCoord
     @y = generateRandomYCoord
     @value = 40
-    @saying = ["", "", ""].sample(1)
+    @saying = ["...for a small fee", "10x 10x 10x"].sample(1)
     @velocity_bonus = 10
     @text = Gosu::Font.new(18)
   end

@@ -6,7 +6,7 @@ class CharlesTennent < Character
     @x = generateRandomXCoord
     @y = generateRandomYCoord
     @value = 20
-    @saying = ["*humming intensifies*", "lolol"].sample(1)
+    @saying = ["*humming intensifies*", "Your eye good, Hunter?"].sample(1)
     @velocity_bonus = 1
     @text = Gosu::Font.new(18)
   end

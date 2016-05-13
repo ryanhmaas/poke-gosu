@@ -6,7 +6,7 @@ class DanPennell < Character
     @x = generateRandomXCoord
     @y = generateRandomYCoord
     @value = 10
-    @saying = ["Actually...", "*pokes head around corner*"].sample(1)
+    @saying = ["Actually...", "*pokes head around corner*", "yo yo yo yo yo yo"].sample(1)
     @velocity_bonus = 0
     @text = Gosu::Font.new(18)
   end

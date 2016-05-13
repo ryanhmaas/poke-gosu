@@ -6,7 +6,7 @@ class EricWard < Character
     @x = generateRandomXCoord
     @y = generateRandomYCoord
     @value = 50
-    @saying = ["Nathan is a bitch", "F2TU"].sample(1)
+    @saying = ["F2TU", "VICTORY!"].sample(1)
     @velocity_bonus = 10
     @text = Gosu::Font.new(18)
   end

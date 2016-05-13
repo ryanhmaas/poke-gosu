@@ -6,7 +6,7 @@ class BrianSeidel < Character
     @x = generateRandomXCoord
     @y = generateRandomYCoord
     @value = 50
-    @saying = ["", "", ""].sample(1)
+    @saying = ["Time to scrum", "make a data mover for that"].sample(1)
     @velocity_bonus = 5
     @text = Gosu::Font.new(18)
   end

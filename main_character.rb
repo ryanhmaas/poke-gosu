@@ -3,8 +3,6 @@ class MainCharacter
   def initialize(x, y)
     @spriteArr = Gosu::Image.load_tiles($window, "images/red.png", 64, 64, false)
     @sprite = @spriteArr[0]
-    #location properties
-
     #these two hold bottom of sprite
     @real_x = x
     @real_y = y
