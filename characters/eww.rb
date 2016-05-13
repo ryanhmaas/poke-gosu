@@ -1,6 +1,5 @@
 class EricWard < Character
   def initialize
-    #@sprite = Gosu::Image.new("./images/8bitcharles.png")
     @spriteArr = Gosu::Image.load_tiles($window, "./images/overworld_sprites.png", 32, 32, false)
     @sprite = @spriteArr[60]
     @x = 0
@@ -24,4 +23,5 @@ class EricWard < Character
   def get_y
     return @y
   end
+
 end

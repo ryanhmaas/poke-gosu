@@ -23,4 +23,5 @@ class DanPennell < Character
   def get_y
     return @y
   end
+
 end

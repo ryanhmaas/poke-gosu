@@ -1,4 +1,5 @@
 class CharlesTennent < Character
+
   def initialize
     @spriteArr = Gosu::Image.load_tiles($window, "./images/overworld_sprites.png", 32, 32, false)
     @sprite = @spriteArr[60]
@@ -23,4 +24,5 @@ class CharlesTennent < Character
   def get_y
     return @y
   end
+
 end
