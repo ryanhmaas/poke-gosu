@@ -70,7 +70,6 @@ class MainCharacter
     @sprite = @spriteArr[0]
     @y += @velocity
     @moving = true
-        puts @velocity.to_s
   end
 
   def get_x
