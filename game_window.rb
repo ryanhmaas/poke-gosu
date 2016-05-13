@@ -18,6 +18,8 @@ class Game < Gosu::Window
     $window = self
     @character = MainCharacter.new(50, 50)
     @background_image = Gosu::Image.new(self, "images/background.png", :tileable => false)
+    @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
+    puts @background_image
     @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
     @backmusic.play(true)
 
@@ -31,13 +33,8 @@ class Game < Gosu::Window
 
   #updates to game window
   def update
-    # increments the counter every second
-    @time = Gosu.milliseconds/1000
-    if @time > GAME_LIMIT then
-      # destroy timer object becoause game is over
-      @time = nil
-      @background_image = Gosu::Image.new(self, "images/game_over.png", false)
-    end
+
+    getTimer
 
     if ((Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft) and canMoveX?(@character.get_x)) then
       @character.move_left
@@ -51,16 +48,31 @@ class Game < Gosu::Window
     if ((Gosu::button_down? Gosu::KbDown or Gosu::button_down? Gosu::GpDown) and canMoveY?(@character.get_y)) then
       @character.move_down
     end
+
   end
 
   def draw
     @character.draw
     @background_image.draw(0,0,0)
-    draw_text(875, 110, @time.to_s, @large_font, 0xffff0000)
+    draw_text(875, 95, @time.to_s, @large_font, 0xffff0000)
   end
 
   def draw_text(x, y, text, font, color)
     font.draw(text, x, y, 3, 1, 1, color)
+<<<<<<< HEAD
+=======
+  end
+
+  private
+  def getTimer
+    # increments the counter every second
+    @time = Gosu.milliseconds/1000
+    if @time > GAME_LIMIT then
+      # destroy timer object becoause game is over
+      @time = nil
+      @background_image = Gosu::Image.new(self, "images/game_over.png", false)
+    end
+>>>>>>> dd6123f85ad7bc10e74dd6f6274c64f3275938b3
   end
 
   private
@@ -104,12 +116,8 @@ class Game < Gosu::Window
   private
   def canMoveY?(coordinate)
     if (coordinate < RESTRICTED_Y_TOP || coordinate > RESTRICTED_Y_BOTTOM) then
-      puts "STOP: Coordinate is " + coordinate.to_s
-      puts "STOP: Top is " + RESTRICTED_Y_TOP.to_s
       return false
     else
-      puts "Coordinate is " + coordinate.to_s
-      puts "Top is " + RESTRICTED_Y_TOP.to_s
       return true
     end
   end
