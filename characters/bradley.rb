@@ -1,15 +1,16 @@
 require_relative 'character'
 
 class ChrisBradley < Character
-  attr_accessor :sprite, :velocity_bonus
-  def initialize
+  attr_accessor :sprite, :velocity_bonus, :text, :saying
 
+  def initialize
     @sprite = Gosu::Image.new("./images/ath-bradley.bmp")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
     @value = 40
-    @sayings = ["Yo, you want Copper River?", "Can you help with HiLevel?", "I am Frodo Baggins"]
-    @velocity_bonus = -4
+    @saying = ["Yo, you want Copper River?", "Can you help with HiLevel?", "I am Frodo Baggins"].sample(1)
+    @velocity_bonus = 0
+    @text = Gosu::Font.new(18)
   end
 
   def draw
@@ -50,11 +51,15 @@ class ChrisBradley < Character
     return @value
   end
 
-  def ending_interaction
-    return @sayings.sample(1)
+  def get_saying
+    return @saying
   end
 
   def get_velocity_bonus
     return @velocity_bonus
+  end
+
+  def get_text
+    return @text
   end
 end

@@ -1,13 +1,14 @@
 class DanPennell < Character
-  attr_accessor :sprite, :velocity_bonus
+  attr_accessor :sprite, :velocity_bonus, :text, :saying
   def initialize
 
     @sprite = Gosu::Image.new("./images/fire-dp.png")
     @x = generateRandomXCoord
     @y = generateRandomYCoord
     @value = 10
-    @sayings = ["Actually...", "*pokes head around corner*"]
-    @velocity_bonus = -2
+    @saying = ["Actually...", "*pokes head around corner*"].sample(1)
+    @velocity_bonus = 0
+    @text = Gosu::Font.new(18)
   end
 
   def draw
@@ -48,8 +49,8 @@ class DanPennell < Character
     return @value
   end
 
-  def ending_interaction
-    return @sayings.sample(1)
+  def get_saying
+    return @saying
   end
 
 
@@ -57,4 +58,7 @@ class DanPennell < Character
     return @velocity_bonus
   end
 
+  def get_text
+    return @text
+  end
 end

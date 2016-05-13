@@ -17,6 +17,7 @@ class MainCharacter
     @moving = false
     @score  = 0
     @velocity = 5
+    @text = Gosu::Font.new(18)
   end
 
   def draw
@@ -85,9 +86,10 @@ class MainCharacter
     #code to remove person from board and gain attribute
     #@score += person[:velocity_bonus]
     @velocity += person[:velocity_bonus]
-    puts @velocity
+    puts @velocity_bonus
     #person = nil
     # @score += person.value
+    #@text.draw(person[:saying], 20, 20, 20)
     person[:name].sprite = nil
   end
 
