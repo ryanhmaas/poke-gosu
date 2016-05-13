@@ -78,4 +78,7 @@ class MainCharacter
     return @y
   end
 
+  def abduct(person)
+    #code to remove person from board and gain attribute
+  end
 end

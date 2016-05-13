@@ -15,4 +15,12 @@ class Character
   def get_sprite
     raise NotImplementedError, 'You must implement the get sprite method'
   end
+
+  def get_x
+    raise NotImplementedError, 'You must implement the get x method'
+  end
+
+  def get_y
+    raise NotImplementedError, 'You must implement the get y method'
+  end
 end
