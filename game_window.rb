@@ -1,5 +1,6 @@
 require 'gosu'
 require_relative 'main_character'
+Dir[File.dirname(__FILE__) + '/characters/*.rb'].each {|file| require file }
 
 class Game < Gosu::Window
   # lol constants
@@ -19,6 +20,15 @@ class Game < Gosu::Window
     @background_image = Gosu::Image.new(self, "images/background.png", :tileable => false)
     @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 10)
     puts @background_image
+    @backmusic = Gosu::Song.new(self, "audio/Pokemon Blue-Red - Pallet Town.mp3")
+    @backmusic.play(true)
+
+    @chars = Character.descendants.sample(5)
+    @chars.each do |char|
+      @char = char.new
+      @char.create(@char.get_sprite, generateRandomXCoord, generateRandomYCoord)
+    end
+    @large_font = Gosu::Font.new(self, "Early Gameboy", SCREEN_HEIGHT / 20)
   end
 
   #updates to game window
@@ -74,6 +84,21 @@ class Game < Gosu::Window
     when Gosu::KbEscape
       close
     end
+  end
+
+
+  def generateRandomXCoord
+    coordinate = 0
+    coordinate = rand(RESTRICTED_X_LEFT..RESTRICTED_X_RIGHT)
+    puts "X: " + coordinate.to_s
+    return coordinate
+  end
+
+  def generateRandomYCoord
+    coordinate = 0
+    coordinate = rand(RESTRICTED_Y_TOP..RESTRICTED_Y_BOTTOM)
+    puts "Y: " + coordinate.to_s
+    return coordinate
   end
 
   private

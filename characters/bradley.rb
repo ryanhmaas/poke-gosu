@@ -1,14 +1,17 @@
 require_relative 'character'
 
 class ChrisBradley < Character
-  def initialize(x, y)
-    @x = x
-    @y = y
+  def initialize
+    puts "Initializing Person instance #{object_id}"
+    @sprite = Gosu::Image.new("./images/8bitcharles.png")
   end
 
-  def draw
-    @sprite = Gosu::Image.new(self, "images/background.png", :tileable => false)
-    @sprite.draw(@x, @y, 5)
+  def create(src,x,y)
+    @sprite.insert(src,x,y)
+  end
+
+  def get_sprite
+    return @sprite
   end
 
 end
